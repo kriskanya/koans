@@ -31,6 +31,7 @@ class AboutHashes < Neo::Koan
     # THINK ABOUT IT:
     #
     # Why might you want to use #fetch instead of #[] when accessing hash keys?
+    # if the key doesn't exist, fetch will tell you it doesn't exist, whereas #[] would return nil (if you also had nil as a value, this could be confusing)
   end
 
   def test_changing_hashes
@@ -92,7 +93,11 @@ class AboutHashes < Neo::Koan
   end
 
   def test_default_value_is_the_same_object
-    hash = Hash.new([])
+    hash = Hash.new([])  # making a new hash with a default value of []
+
+    # the default value of the hash is [] - the array is mutable (which means changeable)
+    # (hash[:one]).<<("uno") - here you're retreiving the value of :one, NOT setting the key and value
+    # (hash[:two])<<("dos")
 
     hash[:one] << "uno"
     hash[:two] << "dos"
@@ -105,7 +110,12 @@ class AboutHashes < Neo::Koan
   end
 
   def test_default_value_with_block
-    hash = Hash.new {|hash, key| hash[key] = [] }
+    hash = Hash.new {|hash, key| hash[key] = [] }  # you have to use this block if you want each to have its own array
+    # if you change an immutable object, everywhere you mention the object, it's changed
+
+    # hash.fetch(:one).push("uno")
+    # {}.fetch(:one).push("uno")
+
 
     hash[:one] << "uno"
     hash[:two] << "dos"
@@ -113,5 +123,9 @@ class AboutHashes < Neo::Koan
     assert_equal ["uno"], hash[:one]
     assert_equal ["dos"], hash[:two]
     assert_equal [], hash[:three]
+
+    # hash = { :one => ["uno"],
+    #         :two => ["dos"],
+    #         :three => [] }
   end
 end

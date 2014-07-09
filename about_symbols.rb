@@ -101,4 +101,5 @@ class AboutSymbols < Neo::Koan
   # THINK ABOUT IT:
   #
   # Why is it not a good idea to dynamically create a lot of symbols?
+  # whereas variables go away after you stop using them, symbols never cease to exist and go on taking up memory
 end

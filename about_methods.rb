@@ -84,7 +84,7 @@ class AboutMethods < Neo::Koan
 
   def method_without_explicit_return
     :a_non_return_value
-    :return_value
+    :return_value # the last thing that happens in a method is returned, unless you tell the method to return
   end
 
   def test_method_without_explicit_return
@@ -118,7 +118,7 @@ class AboutMethods < Neo::Koan
 
   def test_calling_private_methods_with_an_explicit_receiver
     exception = assert_raise(NoMethodError) do
-      self.my_private_method
+      self.my_private_method  # self evaluates to an object, which is the current object;
     end
     assert_match /method/, exception.message
   end
