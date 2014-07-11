@@ -118,6 +118,8 @@ class AboutIteration < Neo::Koan
   #
   #   file = File.open(filename)
   #   # code to read 'file'
+
+  # the reason we tend to do File.open is because it executes the block and then closes the file
   #
   # When you get to the "AboutSandwichCode" koan, recheck your answer.
 

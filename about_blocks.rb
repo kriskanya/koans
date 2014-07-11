@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 class AboutBlocks < Neo::Koan
   def method_with_block
-    result = yield
+    result = yield  # yield the value of block
     result
   end
 
@@ -23,7 +23,7 @@ class AboutBlocks < Neo::Koan
   end
 
   def test_blocks_can_take_arguments
-    method_with_block_arguments do |argument|
+    method_with_block_arguments do |argument|  # this block gets passed in like an anonymous function
       assert_equal "Jim", argument
     end
   end
@@ -67,7 +67,7 @@ class AboutBlocks < Neo::Koan
   end
 
   def test_blocks_can_be_assigned_to_variables_and_called_explicitly
-    add_one = lambda { |n| n + 1 }
+    add_one = lambda { |n| n + 1 }  #lambda is a block you can pass around as a variable
     assert_equal 11, add_one.call(10)
 
     # Alternative calling syntax
@@ -82,7 +82,7 @@ class AboutBlocks < Neo::Koan
 
   # ------------------------------------------------------------------
 
-  def method_with_explicit_block(&block)
+  def method_with_explicit_block(&block)  # & says this variable is a block
     block.call(10)
   end
 
